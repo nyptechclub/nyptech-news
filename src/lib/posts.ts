@@ -4,7 +4,7 @@ import notion, { notionMd } from "@/lib/integrations/notion";
 
 const databaseId = "1a8c3dd702f68000981ff849b8861709";
 
-type Post = {
+export type Post = {
   id: string;
   name: string;
   tags: string[];
