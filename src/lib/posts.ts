@@ -1,4 +1,6 @@
-import notion from "@/lib/integrations/notion";
+"use server";
+
+import notion, { notionMd } from "@/lib/integrations/notion";
 
 const databaseId = "1a8c3dd702f68000981ff849b8861709";
 
@@ -27,4 +29,10 @@ export async function getPosts() {
         createdAt: new Date(data.created_time),
       } as Post)
   );
+}
+
+export async function getPostContents(id: string) {
+  const blocks = await notionMd.pageToMarkdown(id);
+  const markdown = notionMd.toMarkdownString(blocks);
+  return markdown.parent as string;
 }
