@@ -6,13 +6,9 @@ export default async function Page() {
 
   return (
     <main className={"p-4"}>
-      <div className={"flex flex-col gap-2"}>
+      <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
         {posts.map((post) => (
-          <Link
-            key={post.id}
-            className={"card bg-base-300 w-80 hover:bg-base-200 transition"}
-            href={`/posts/${post.id}`}
-          >
+          <Link key={post.id} className={"card bg-base-300 hover:bg-base-200 transition"} href={`/posts/${post.id}`}>
             <figure>
               <img className={"aspect-video object-cover"} src={post.cover} />
             </figure>
