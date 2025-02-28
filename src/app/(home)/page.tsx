@@ -5,7 +5,7 @@ export default async function Page() {
   const posts = await getPosts();
 
   return (
-    <main>
+    <main className={"p-4"}>
       <div className={"flex flex-col gap-2"}>
         {posts.map((post) => (
           <Link

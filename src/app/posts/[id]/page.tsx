@@ -29,9 +29,11 @@ export default function Page() {
 
   return (
     <main>
-      <article className={"prose"}>
-        <Markdown>{content}</Markdown>
-      </article>
+      <div className={"my-8 p-8 rounded-box mx-auto w-max bg-base-300"}>
+        <article className={"prose"}>
+          <Markdown>{content}</Markdown>
+        </article>
+      </div>
     </main>
   );
 }
