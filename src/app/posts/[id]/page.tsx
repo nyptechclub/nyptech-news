@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingPage from "@/app/loading";
 import { getPostContents } from "@/lib/posts";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -24,7 +25,7 @@ export default function Page() {
   }, [id]);
 
   if (loading) {
-    return <main>Loading...</main>;
+    return <LoadingPage />;
   }
 
   return (

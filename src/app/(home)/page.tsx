@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingPage from "@/app/loading";
 import { getPosts, Post } from "@/lib/posts";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ export default function Page() {
   }, []);
 
   if (loading) {
-    return <main>Loading...</main>;
+    return <LoadingPage />;
   }
 
   return (
@@ -70,6 +71,9 @@ export default function Page() {
             <div className={"card-body"}>
               <h2 className={"card-title"}>{post.name}</h2>
               <p className={"text-current/50"}>{post.excerpt}</p>
+              <p>
+                <span className={"badge badge-primary"}>{post.tags[0]}</span>
+              </p>
             </div>
           </Link>
         ))}

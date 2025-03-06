@@ -30,18 +30,29 @@ export async function getPosts() {
       },
     ],
   });
-  return response.results.map(
-    (data: any) =>
-      ({
-        id: data.id,
-        name: data.properties.Name.title[0].text.content,
-        tags: data.properties.Tags.multi_select.map((tag: any) => tag.name),
-        excerpt: data.properties.Excerpt.rich_text[0].text.content,
-        cover: data.cover?.external?.url ?? undefined,
-        modifiedAt: new Date(data.last_edited_time),
-        createdAt: new Date(data.created_time),
-      } as Post)
-  );
+  console.log(JSON.stringify(response.results));
+  return response.results.map((data: any) => {
+    const coverType = data.cover?.type as "external" | "file";
+
+    let post = {
+      id: data.id,
+      name: data.properties.Name.title[0].text.content,
+      tags: data.properties.Tags.multi_select.map((tag: any) => tag.name),
+      excerpt: data.properties.Excerpt.rich_text[0].text.content,
+      modifiedAt: new Date(data.last_edited_time),
+      createdAt: new Date(data.created_time),
+    } as Post;
+
+    if (coverType === "external") {
+      post.cover = data.cover.external.url;
+    } else if (coverType === "file") {
+      post.cover = data.cover.file.url;
+    } else {
+      post.cover = undefined;
+    }
+
+    return post;
+  });
 }
 
 export async function getPostContents(id: string) {
