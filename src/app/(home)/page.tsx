@@ -28,7 +28,7 @@ export default function Page() {
       <nav className={"mb-4 navbar bg-base-300 rounded-box px-4"}>
         <div className={"navbar-start"}>
           <Link className={"btn btn-ghost"} href={"/posts"}>
-            <span className={"font-bold text-lg"}>SIT Newsletter</span>
+            <span className={"font-bold text-lg"}>SIT Chapters</span>
           </Link>
         </div>
         <div className={"navbar-center"}>
@@ -54,7 +54,7 @@ export default function Page() {
       <div className={"mb-4 bg-base-300 rounded-box h-100"}>
         <div className={"size-full grid grid-cols-[1fr_auto]"}>
           <div className={"ml-16 flex flex-col justify-center"}>
-            <h2 className={"text-4xl font-bold"}>Welcome to the SIT Newsletter</h2>
+            <h2 className={"text-4xl font-bold"}>Welcome to SIT Chapters!</h2>
             <p className={"mt-2"}>Stay up to date with the latest news and events happening in NYP SIT.</p>
           </div>
           <div className={"grid place-items-center"}>

@@ -30,7 +30,7 @@ export async function getPosts() {
       },
     ],
   });
-  console.log(JSON.stringify(response.results));
+
   return response.results.map((data: any) => {
     const coverType = data.cover?.type as "external" | "file";
 
