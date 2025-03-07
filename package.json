@@ -11,10 +11,14 @@
   "dependencies": {
     "@notionhq/client": "^2.2.16",
     "next": "15.2.0",
-    "notion-to-md": "^3.1.6",
+    "notion-client": "^7.1.6",
+    "notion-compat": "^7.1.6",
+    "notion-types": "^7.1.6",
+    "notion-utils": "^7.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-markdown": "^10.0.0"
+    "react-markdown": "^10.0.0",
+    "react-notion-x": "^7.2.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",

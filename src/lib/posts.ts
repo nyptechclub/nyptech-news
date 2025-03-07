@@ -1,6 +1,6 @@
 "use server";
 
-import notion, { notionMd } from "@/lib/integrations/notion";
+import notion from "@/lib/integrations/notion";
 
 const databaseId = "1a8c3dd702f68000981ff849b8861709";
 
@@ -15,7 +15,7 @@ export type Post = {
 };
 
 export async function getPosts() {
-  const response = await notion.databases.query({
+  const response = await notion.client.databases.query({
     database_id: databaseId,
     filter: {
       property: "Visibility",
@@ -56,7 +56,5 @@ export async function getPosts() {
 }
 
 export async function getPostContents(id: string) {
-  const blocks = await notionMd.pageToMarkdown(id);
-  const markdown = notionMd.toMarkdownString(blocks);
-  return markdown.parent as string;
+  return await notion.getPage(id);
 }
