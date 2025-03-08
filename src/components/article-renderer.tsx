@@ -1,6 +1,7 @@
 import { NotionRenderer } from "react-notion-x";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { ExtendedRecordMap } from "notion-types";
 
 const Code = dynamic(() => import("react-notion-x/build/third-party/code").then((m) => m.Code));
@@ -24,6 +25,8 @@ export default function ArticleRenderer(props: { content: ExtendedRecordMap }) {
         Equation,
         Modal,
         Pdf,
+        nextImage: Image, // or nextLegacyImage: LegacyImage,
+        nextLink: Link,
       }}
     />
   );

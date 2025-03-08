@@ -6,10 +6,14 @@ const databaseId = "1a8c3dd702f68000981ff849b8861709";
 
 export type Post = {
   id: string;
+  cover?: string;
   name: string;
   tags: string[];
   excerpt: string;
-  cover?: string;
+  writtenBy: {
+    avatar: string;
+    name: string;
+  }[];
   modifiedAt: Date;
   createdAt: Date;
 };
@@ -66,6 +70,10 @@ export async function getPost(id: string) {
         : response.cover?.type === "file"
         ? response.cover.file.url
         : undefined,
+    writtenBy: response.properties["Written By"].people.map((person: any) => ({
+      avatar: person.avatar_url,
+      name: person.name,
+    })),
     modifiedAt: new Date(response.last_edited_time),
     createdAt: new Date(response.created_time),
   } as Post;

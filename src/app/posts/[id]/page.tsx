@@ -44,23 +44,46 @@ export default function Page() {
 
   return (
     <main className={"grid w-max mx-auto grid-cols-[1fr_auto] gap-4 p-4"}>
+      {/* Left Column */}
       <article className={"p-4 w-max rounded-box bg-base-300"}>
         <ArticleRenderer content={content} />
       </article>
-      <div className={"w-80 h-max sticky top-4 bg-base-300 rounded-box overflow-hidden"}>
-        <figure>
-          <img src={post?.cover} alt={post?.name} className={"w-full h-full object-cover"} />
-        </figure>
-        <div className={"p-4"}>
-          <h1 className={"mb-1 text-lg font-bold"}>{post?.name}</h1>
-          <p className={"mb-2 text-current/50"}>{post?.excerpt}</p>
-          <p>
-            {post?.tags.map((tag) => (
-              <span key={tag} className={"badge badge-primary"}>
-                {tag}
+
+      {/* Right Column */}
+      <div className={"w-80 h-max sticky top-4 flex flex-col gap-2"}>
+        {/* Post Overview */}
+        <div className={"rounded-box overflow-hidden bg-base-300"}>
+          <figure>
+            <img src={post?.cover} alt={post?.name} className={"w-full h-full object-cover"} />
+          </figure>
+          <div className={"p-4"}>
+            <h2 className={"mb-1 text-lg font-bold"}>{post?.name}</h2>
+            <p className={"mb-2 text-current/50"}>{post?.excerpt}</p>
+            <p>
+              {post?.tags.map((tag) => (
+                <span key={tag} className={"badge badge-primary"}>
+                  {tag}
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
+
+        {/* Author List */}
+        <div className={"rounded-box bg-base-300"}>
+          <div className={"p-4 pb-0"}>
+            <h2 className={"mb-1 text-lg font-bold"}>Written By</h2>
+          </div>
+          {post?.writtenBy.map((author) => (
+            <div key={author.name} className={"p-4 gap-4 flex items-center"}>
+              <span className={"avatar"}>
+                <div className={"w-8 rounded-full"}>
+                  <img src={author.avatar} />
+                </div>
               </span>
-            ))}
-          </p>
+              <span className={"font-medium"}>{author.name}</span>
+            </div>
+          ))}
         </div>
       </div>
     </main>
