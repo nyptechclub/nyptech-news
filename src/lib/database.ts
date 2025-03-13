@@ -1,6 +1,6 @@
 "use server";
 
-import { articleDatabaseId } from "@/lib/contants";
+import { aboutPageId, articleDatabaseId } from "@/lib/contants";
 import notion from "@/lib/integrations/notion";
 import { Article } from "@/lib/schema";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
@@ -66,4 +66,8 @@ export async function getArticle(id: string) {
 
 export async function getArticleContent(id: string) {
   return await notion.getPage(id);
+}
+
+export async function getAboutContent() {
+  return await notion.getPage(aboutPageId);
 }

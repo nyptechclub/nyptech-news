@@ -3,13 +3,12 @@
 import LoadingPage from "@/app/loading";
 import NotFoundPage from "@/app/not-found";
 import ArticleRenderer from "@/components/article-renderer";
-import { getArticle, getArticleContent } from "@/lib/articles";
+import { getArticle, getArticleContent } from "@/lib/database";
 import { Article } from "@/lib/schema";
 import { useParams } from "next/navigation";
 import { ExtendedRecordMap } from "notion-types";
 import { parsePageId } from "notion-utils";
 import { useEffect, useState } from "react";
-import "react-notion-x/src/styles.css";
 
 export default function Page() {
   const params = useParams();
@@ -44,11 +43,11 @@ export default function Page() {
   }
 
   return (
-    <main className={"grid w-max mx-auto grid-cols-[1fr_auto] gap-4 p-4"}>
+    <main className={"grid w-max mx-auto grid-cols-[1fr_auto] gap-2 p-4"}>
       {/* Left Column */}
-      <article className={"p-4 w-max rounded-box bg-base-300"}>
+      <div className={"p-2 w-[800px] rounded-box bg-base-300"}>
         <ArticleRenderer content={articleContent} />
-      </article>
+      </div>
 
       {/* Right Column */}
       <div className={"w-80 h-max sticky top-4 flex flex-col gap-2"}>

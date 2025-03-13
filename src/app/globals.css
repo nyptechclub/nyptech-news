@@ -6,3 +6,12 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
+.notion-page {
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+.notion-viewport + * {
+  margin-top: 0 !important;
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
-import { getArticles } from "@/lib/articles";
+import { getArticles } from "@/lib/database";
 import { Article } from "@/lib/schema";
 import Link from "next/link";
 import { useEffect, useState } from "react";

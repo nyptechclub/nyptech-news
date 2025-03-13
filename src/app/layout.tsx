@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Layout(props: React.PropsWithChildren) {
   return (
-    <html lang={"en"}>
+    <html lang={"en"} data-theme={"dark"}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className={"p-4 pb-0"}>
           <NavigationBar />
