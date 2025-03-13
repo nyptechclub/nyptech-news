@@ -1,0 +1,1 @@
+export const articleDatabaseId = "1a8c3dd702f68000981ff849b8861709";

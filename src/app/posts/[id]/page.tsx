@@ -3,7 +3,8 @@
 import LoadingPage from "@/app/loading";
 import NotFoundPage from "@/app/not-found";
 import ArticleRenderer from "@/components/article-renderer";
-import { getPost, getPostContents as getPostContent, Post } from "@/lib/posts";
+import { getArticle, getArticleContent } from "@/lib/articles";
+import { Article } from "@/lib/schema";
 import { useParams } from "next/navigation";
 import { ExtendedRecordMap } from "notion-types";
 import { parsePageId } from "notion-utils";
@@ -14,8 +15,8 @@ export default function Page() {
   const params = useParams();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [post, setPost] = useState<Post | null>(null);
-  const [content, setContent] = useState<ExtendedRecordMap | null>(null);
+  const [article, setArticle] = useState<Article | null>(null);
+  const [articleContent, setArticleContent] = useState<ExtendedRecordMap | null>(null);
 
   const id = params.id as string;
 
@@ -23,11 +24,11 @@ export default function Page() {
     const pageId = parsePageId(id);
 
     Promise.all([
-      getPost(id).then((post) => {
-        setPost(post);
+      getArticle(id).then((post) => {
+        setArticle(post);
       }),
-      getPostContent(pageId!).then((content) => {
-        setContent(content);
+      getArticleContent(pageId!).then((content) => {
+        setArticleContent(content);
       }),
     ]).finally(() => {
       setLoading(false);
@@ -38,7 +39,7 @@ export default function Page() {
     return <LoadingPage />;
   }
 
-  if (!content) {
+  if (!articleContent) {
     return <NotFoundPage />;
   }
 
@@ -46,7 +47,7 @@ export default function Page() {
     <main className={"grid w-max mx-auto grid-cols-[1fr_auto] gap-4 p-4"}>
       {/* Left Column */}
       <article className={"p-4 w-max rounded-box bg-base-300"}>
-        <ArticleRenderer content={content} />
+        <ArticleRenderer content={articleContent} />
       </article>
 
       {/* Right Column */}
@@ -54,13 +55,13 @@ export default function Page() {
         {/* Post Overview */}
         <div className={"rounded-box overflow-hidden bg-base-300"}>
           <figure>
-            <img src={post?.cover} alt={post?.name} className={"w-full h-full object-cover"} />
+            <img src={article?.cover} alt={article?.name} className={"w-full h-full object-cover"} />
           </figure>
           <div className={"p-4"}>
-            <h2 className={"mb-1 text-lg font-bold"}>{post?.name}</h2>
-            <p className={"mb-2 text-current/50"}>{post?.excerpt}</p>
+            <h2 className={"mb-1 text-lg font-bold"}>{article?.name}</h2>
+            <p className={"mb-2 text-current/50"}>{article?.excerpt}</p>
             <p>
-              {post?.tags.map((tag) => (
+              {article?.tags.map((tag) => (
                 <span key={tag} className={"badge badge-primary"}>
                   {tag}
                 </span>
@@ -74,7 +75,7 @@ export default function Page() {
           <div className={"p-4 pb-0"}>
             <h2 className={"mb-1 text-lg font-bold"}>Written By</h2>
           </div>
-          {post?.writtenBy.map((author) => (
+          {article?.writtenBy.map((author) => (
             <div key={author.name} className={"p-4 gap-4 flex items-center"}>
               <span className={"avatar"}>
                 <div className={"w-8 rounded-full"}>
