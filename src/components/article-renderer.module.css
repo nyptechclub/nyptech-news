@@ -1,0 +1,8 @@
+.renderer {
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+:global(.notion-viewport + *) {
+  margin-top: 0 !important;
+}
