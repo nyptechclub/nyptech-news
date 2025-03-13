@@ -5,19 +5,19 @@ import Link from "next/link";
 const links = [
   {
     name: "Featured",
-    url: "/posts/featured",
+    url: "/catalog/featured",
   },
   {
     name: "Clubs",
-    url: "/posts/clubs",
+    url: "/catalog/clubs",
   },
   {
     name: "Tech",
-    url: "/posts/tech",
+    url: "/catalog/tech",
   },
   {
     name: "Guides",
-    url: "/posts/guides",
+    url: "/catalog/guides",
   },
 ];
 
