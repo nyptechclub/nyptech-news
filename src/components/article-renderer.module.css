@@ -3,6 +3,6 @@
   padding: 0 !important;
 }
 
-:global(.notion-viewport + *) {
+.renderer :nth-child(2) {
   margin-top: 0 !important;
 }
