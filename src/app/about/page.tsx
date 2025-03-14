@@ -42,7 +42,7 @@ export default function Page() {
         {/* Right Column */}
         <div>
           {/* Team */}
-          <div className={"mockup-window bg-base-300 pb-8"}>
+          <div className={"lg:sticky lg:top-4 mockup-window bg-base-300 pb-8"}>
             <div className={"p-4 px-8"}>
               <h2 className={"font-bold text-4xl"}>Meet the Team</h2>
               <div className={"mt-6 grid grid-cols-2 max-sm:grid-cols-1 lg:grid-cols-1 gap-8"}>
