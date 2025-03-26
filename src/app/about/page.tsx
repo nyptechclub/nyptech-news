@@ -2,7 +2,7 @@
 
 import LoadingPage from "@/app/loading";
 import ArticleRenderer from "@/components/article-renderer";
-import { aboutPageId } from "@/lib/contants";
+import { aboutPageId } from "@/lib/constants";
 import { getArticleContent } from "@/lib/database";
 import { ExtendedRecordMap } from "notion-types";
 import { parsePageId } from "notion-utils";

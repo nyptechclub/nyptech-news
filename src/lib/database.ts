@@ -1,6 +1,6 @@
 "use server";
 
-import { aboutPageId, articleDatabaseId } from "@/lib/contants";
+import { aboutPageId, articleDatabaseId } from "@/lib/constants";
 import notion from "@/lib/integrations/notion";
 import { Article } from "@/lib/schema";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
@@ -32,7 +32,7 @@ function parseArticle(data: PageObjectResponse) {
   } as Article;
 }
 
-export async function getArticles() {
+export async function getArticles(cursor?: string, size?: number) {
   // Fetch all articles
   const response = await notion.client.databases.query({
     database_id: articleDatabaseId,
@@ -48,10 +48,19 @@ export async function getArticles() {
         direction: "descending",
       },
     ],
+    start_cursor: cursor,
+    page_size: size ?? 100,
   });
 
-  // Parse and return articles
-  return response.results.map((data) => parseArticle(data as PageObjectResponse));
+  return {
+    // Add metadata
+    nextCursor: response.next_cursor,
+    inSize: size ?? 100,
+    outSize: response.results.length,
+
+    // Parse articles as results
+    results: response.results.map((data) => parseArticle(data as PageObjectResponse)),
+  };
 }
 
 export async function getArticle(id: string) {

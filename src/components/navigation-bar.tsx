@@ -42,13 +42,13 @@ export default function NavigationBar(props: { className?: string }) {
         </Link>
       </div>
       <div className={"navbar-center"}>
-        <ul className={"max-lg:hidden menu menu-horizontal"}>
+        {/* <ul className={"max-lg:hidden menu menu-horizontal"}>
           {links.map((link) => (
             <li key={link.url}>
               <Link href={link.url}>{link.name}</Link>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
       <div className={"navbar-end"}>
         <Link className={"btn btn-ghost"} href={"/about"}>

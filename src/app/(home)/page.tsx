@@ -12,8 +12,9 @@ export default function Page() {
 
   useEffect(() => {
     getArticles()
-      .then((posts) => {
-        setArticles(posts);
+      .then((response) => {
+        console.log(response);
+        setArticles(response.results);
       })
       .finally(() => {
         setLoading(false);
