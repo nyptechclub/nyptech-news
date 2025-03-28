@@ -1,23 +1,17 @@
 import clsx from "clsx";
-import { MenuIcon } from "lucide-react";
+import { ClubIcon, MenuIcon, ScrollText } from "lucide-react";
 import Link from "next/link";
 
 const links = [
   {
-    name: "Featured",
-    url: "/catalog/featured",
+    name: "Catalog",
+    icon: <ScrollText className={"size-4"} />,
+    url: "/catalog",
   },
   {
     name: "Clubs",
+    icon: <ClubIcon className={"size-4"} />,
     url: "/catalog/clubs",
-  },
-  {
-    name: "Tech",
-    url: "/catalog/tech",
-  },
-  {
-    name: "Guides",
-    url: "/catalog/guides",
   },
 ];
 
@@ -32,7 +26,10 @@ export default function NavigationBar(props: { className?: string }) {
           <ul tabIndex={0} className={"dropdown-content menu bg-base-300 rounded-box w-48 p-2 shadow-lg"}>
             {links.map((link) => (
               <li key={link.url}>
-                <Link href={link.url}>{link.name}</Link>
+                <Link href={link.url}>
+                  {link.icon}
+                  {link.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -42,13 +39,16 @@ export default function NavigationBar(props: { className?: string }) {
         </Link>
       </div>
       <div className={"navbar-center"}>
-        {/* <ul className={"max-lg:hidden menu menu-horizontal"}>
+        <ul className={"max-lg:hidden menu menu-horizontal"}>
           {links.map((link) => (
             <li key={link.url}>
-              <Link href={link.url}>{link.name}</Link>
+              <Link href={link.url}>
+                {link.icon}
+                {link.name}
+              </Link>
             </li>
           ))}
-        </ul> */}
+        </ul>
       </div>
       <div className={"navbar-end"}>
         <Link className={"btn btn-ghost"} href={"/about"}>

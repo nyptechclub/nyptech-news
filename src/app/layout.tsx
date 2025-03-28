@@ -1,5 +1,6 @@
 import NavigationBar from "@/components/navigation-bar";
 import { geistMono, geistSans } from "@/fonts";
+import clsx from "clsx";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
 export default function Layout(props: React.PropsWithChildren) {
   return (
     <html lang={"en"} data-theme={"dark"}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className={"p-4 pb-0"}>
+      <body className={clsx(geistSans.variable, geistMono.variable, "antialiased flex flex-col gap-2 p-4")}>
+        <div>
           <NavigationBar />
         </div>
-        <div>{props.children}</div>
+        <div className={"flex-1"}>{props.children}</div>
       </body>
     </html>
   );

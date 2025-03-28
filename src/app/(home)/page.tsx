@@ -1,24 +1,28 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
-import { getArticles } from "@/lib/database";
+import { getArticles, getFeaturedArticles } from "@/lib/database";
 import { Article } from "@/lib/schema";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Page() {
   const [loading, setLoading] = useState<boolean>(true);
-  const [article, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [featuredArticles, setFeaturedArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    getArticles()
-      .then((response) => {
-        console.log(response);
+    Promise.all([
+      getArticles().then((response) => {
         setArticles(response.results);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      }),
+      getFeaturedArticles().then((response) => {
+        setFeaturedArticles(response.results);
+      }),
+    ]).finally(() => {
+      setLoading(false);
+    });
   }, []);
 
   if (loading) {
@@ -26,20 +30,37 @@ export default function Page() {
   }
 
   return (
-    <main className={"p-4"}>
-      <div className={"mb-4 bg-base-300 rounded-box h-100"}>
-        <div className={"size-full grid grid-cols-[1fr_auto]"}>
-          <div className={"ml-16 flex flex-col justify-center"}>
-            <h2 className={"text-4xl font-bold"}>Welcome to SIT Chapters!</h2>
-            <p className={"mt-2"}>Stay up to date with the latest news and events happening in NYP SIT.</p>
+    <main>
+      <div className={"mb-4 aspect-video max-h-100 carousel w-full rounded-box"}>
+        {featuredArticles.map((article, index) => (
+          <div key={index} id={`featured${index + 1}`} className={"carousel-item w-full relative"}>
+            <img className={"absolute size-full object-cover blur-xs brightness-50"} src={article.cover} />
+            <div className={"absolute size-full flex items-end"}>
+              <div className={"px-6 md:px-16 py-4 md:py-8"}>
+                <h2 className={"mb-2 text-2xl md:text-4xl font-bold"}>{article.name}</h2>
+                <p className={"text-sm md:text-md text-current/70"}>{article.excerpt}</p>
+              </div>
+            </div>
+            <div
+              className={
+                "max-md:hidden absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"
+              }
+            >
+              <Link
+                className={"btn btn-circle"}
+                href={articles[index - 1] ? `#featured${index}` : `#featured${articles.length}`}
+              >
+                <ChevronLeftIcon />
+              </Link>
+              <Link className={"btn btn-circle"} href={articles[index + 1] ? `#featured${index + 2}` : `#featured1`}>
+                <ChevronRightIcon />
+              </Link>
+            </div>
           </div>
-          <div className={"grid place-items-center"}>
-            <img className={"h-[80%] aspect-square"} src={"/icon.png"} alt={"Image"} />
-          </div>
-        </div>
+        ))}
       </div>
       <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
-        {article.map((article) => (
+        {articles.map((article) => (
           <Link
             key={article.id}
             className={"card bg-base-300 hover:bg-base-200 transition"}

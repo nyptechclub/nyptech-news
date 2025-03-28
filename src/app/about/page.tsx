@@ -29,7 +29,7 @@ export default function Page() {
   }
 
   return (
-    <main className={"p-4"}>
+    <main>
       <div className={"grid lg:grid-cols-[800px_1fr] gap-2"}>
         {/* Left Column */}
         <div>

@@ -63,6 +63,35 @@ export async function getArticles(cursor?: string, size?: number) {
   };
 }
 
+export async function getFeaturedArticles() {
+  // Fetch all articles
+  const response = await notion.client.databases.query({
+    database_id: articleDatabaseId,
+    filter: {
+      property: "Visibility",
+      select: {
+        equals: "Featured",
+      },
+    },
+    sorts: [
+      {
+        timestamp: "created_time",
+        direction: "descending",
+      },
+    ],
+    page_size: 3,
+  });
+
+  return {
+    // Add metadata
+    inSize: 3,
+    outSize: response.results.length,
+
+    // Parse articles as results
+    results: response.results.map((data) => parseArticle(data as PageObjectResponse)),
+  };
+}
+
 export async function getArticle(id: string) {
   // Fetch article by ID
   const response: any = await notion.client.pages.retrieve({
