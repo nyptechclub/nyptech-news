@@ -40,14 +40,14 @@ export default function Page() {
         <div className={"lg:hidden"}>
           <div className={"join w-full"}>
             <button
-              className={"btn btn-square join-item btn-primary"}
+              className={"btn btn-square join-item btn-neutral"}
               type={"button"}
               onClick={() => setShowFilters(!showFilters)}
             >
               <FilterIcon />
             </button>
             <input className={"input join-item flex-1"} placeholder={"Search articles..."} />
-            <button className={"btn btn-square join-item btn-primary"} type={"submit"}>
+            <button className={"btn btn-square join-item btn-neutral"} type={"submit"}>
               <SearchIcon />
             </button>
           </div>
@@ -84,18 +84,20 @@ export default function Page() {
         {articles.map((article) => (
           <Link
             key={article.id}
-            className={"h-34 lg:h-40 bg-base-300 flex rounded-box overflow-hidden hover:bg-base-200 transition"}
+            className={"card hover:bg-base-200 transition sm:flex-row sm:h-40 bg-base-300"}
             href={`/posts/${article.id}`}
           >
-            <img className={"aspect-video h-full object-cover"} src={article.cover} />
-            <div className={"flex-1 p-4 flex flex-col"}>
-              <h2 className={"mb-1 text-lg lg:text-2xl font-bold"}>{article.name}</h2>
+            <figure>
+              <img className={"aspect-video h-full object-cover"} src={article.cover} />
+            </figure>
+            <div className={"card-body p-4"}>
+              <h2 className={"card-title"}>{article.name}</h2>
               <div className={"flex-1"}>
-                <p className={"max-lg:text-sm text-current/50"}>{article.excerpt}</p>
+                <p className={"text-current/50"}>{article.excerpt}</p>
               </div>
               <div>
                 {article.tags.map((tag) => (
-                  <div key={tag} className={"badge max-lg:badge-sm badge-info"}>
+                  <div key={tag} className={"badge badge-info"}>
                     {tag}
                   </div>
                 ))}

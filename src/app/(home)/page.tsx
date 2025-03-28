@@ -41,21 +41,23 @@ export default function Page() {
                 <p className={"text-sm md:text-md text-current/70"}>{article.excerpt}</p>
               </div>
             </div>
-            <div
-              className={
-                "max-md:hidden absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"
-              }
-            >
-              <Link
-                className={"btn btn-circle"}
-                href={articles[index - 1] ? `#featured${index}` : `#featured${articles.length}`}
+            {featuredArticles.length > 1 && (
+              <div
+                className={
+                  "max-md:hidden absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"
+                }
               >
-                <ChevronLeftIcon />
-              </Link>
-              <Link className={"btn btn-circle"} href={articles[index + 1] ? `#featured${index + 2}` : `#featured1`}>
-                <ChevronRightIcon />
-              </Link>
-            </div>
+                <Link
+                  className={"btn btn-circle"}
+                  href={articles[index - 1] ? `#featured${index}` : `#featured${articles.length}`}
+                >
+                  <ChevronLeftIcon />
+                </Link>
+                <Link className={"btn btn-circle"} href={articles[index + 1] ? `#featured${index + 2}` : `#featured1`}>
+                  <ChevronRightIcon />
+                </Link>
+              </div>
+            )}
           </div>
         ))}
       </div>

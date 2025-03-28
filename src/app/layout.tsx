@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Layout(props: React.PropsWithChildren) {
   return (
     <html lang={"en"} data-theme={"dark"}>
-      <body className={clsx(geistSans.variable, geistMono.variable, "antialiased flex flex-col gap-2 p-4")}>
+      <body className={clsx(geistSans.variable, geistMono.variable, "antialiased flex flex-col gap-2 p-2 lg:p-4")}>
         <div>
           <NavigationBar />
         </div>
