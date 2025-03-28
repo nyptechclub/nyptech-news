@@ -107,5 +107,5 @@ export async function getArticleContent(id: string) {
 }
 
 export async function getAboutContent() {
-  return await notion.getPage(aboutPageId);
+  return await getArticleContent(aboutPageId);
 }
