@@ -32,15 +32,49 @@ function parseArticle(data: PageObjectResponse) {
   } as Article;
 }
 
-export async function getArticles(cursor?: string, size?: number) {
+export async function getArticles(
+  filters?: { search?: string; tags?: string[]; clubs?: string[] },
+  cursor?: string,
+  size?: number
+) {
   // Fetch all articles
   const response = await notion.client.databases.query({
     database_id: articleDatabaseId,
     filter: {
-      property: "Visibility",
-      select: {
-        does_not_equal: "Draft",
-      },
+      and: [
+        {
+          property: "Visibility",
+          select: {
+            does_not_equal: "Draft",
+          },
+        },
+        ...(filters?.search
+          ? [
+              {
+                property: "Name",
+                title: {
+                  contains: filters.search,
+                },
+              },
+            ]
+          : []),
+        ...(filters?.tags?.length
+          ? filters.tags.map((tag) => ({
+              property: "Tags",
+              multi_select: {
+                contains: tag,
+              },
+            }))
+          : []),
+        ...(filters?.clubs?.length
+          ? filters.clubs.map((club) => ({
+              property: "Club",
+              multi_select: {
+                contains: club,
+              },
+            }))
+          : []),
+      ],
     },
     sorts: [
       {
