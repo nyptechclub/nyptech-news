@@ -3,7 +3,7 @@ import Link from "next/link";
 const clubs = [
   {
     name: "NYP Technopreneurs",
-    description: "Learn to be a technopreneur!",
+    description: "Inspiring the next generation of technopreneurs.",
     logo: "/clubs/nyptech.png",
     url: "https://nyptech.club",
   },
@@ -21,14 +21,14 @@ const clubs = [
   },
   {
     name: "NYP LIT",
-    description: "Empowering women of our generation!",
+    description: "Empowering women of our generation.",
     logo: "/clubs/nyplit.jpg",
     url: "https://nyp-lit.github.io",
   },
   {
     name: "Google Developer Student Club",
-    description: "Be part of the innovation!",
-    logo: "/placeholder.webp",
+    description: "Learn Together, Build Together.",
+    logo: "/clubs/gdsc.jpg",
     url: "#",
   },
 ];
