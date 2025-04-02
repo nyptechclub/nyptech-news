@@ -9,9 +9,9 @@ const clubs = [
   },
   {
     name: "NYP Cloud",
-    description: "Learning to power the world!",
-    logo: "/placeholder.webp",
-    url: "#",
+    description: "Discover cloud and grow with us.",
+    logo: "/clubs/nypcloud.png",
+    url: "https://nypcloud.netlify.app",
   },
   {
     name: "NYP Blockchain",
