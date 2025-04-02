@@ -1,4 +1,4 @@
-name: Vercel Production Deployment
+name: Vercel Deployment
 on:
   push:
     branches:
@@ -9,6 +9,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -28,11 +29,11 @@ jobs:
       - name: Install Vercel CLI
         run: pnpm install --global vercel
 
-      - name: Pull Vercel Environment Information
+      - name: Pull Environment
         run: pnpm vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Build Project Artifacts
+      - name: Build Project
         run: pnpm vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy Project Artifacts
+      - name: Deploy Artifacts
         run: pnpm vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
