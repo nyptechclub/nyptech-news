@@ -15,8 +15,8 @@ const clubs = [
   },
   {
     name: "NYP Blockchain",
-    description: "Join the us within the new web!",
-    logo: "/placeholder.webp",
+    description: "Chain the Future at NYP.",
+    logo: "/clubs/nypblockchain.jpg",
     url: "#",
   },
   {
@@ -37,7 +37,7 @@ export default function Page() {
   return (
     <main className={"grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
       {clubs.map((club, index) => (
-        <Link key={index} className={"card bg-base-300 hover:bg-base-200 transition"} target={"_blank"} href={club.url}>
+        <Link key={index} className={"card bg-base-300 hover:bg-base-200 transition"} href={club.url}>
           <figure>
             <img className={"aspect-square object-cover"} src={club.logo} />
           </figure>
