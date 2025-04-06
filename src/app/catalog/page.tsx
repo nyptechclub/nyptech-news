@@ -82,12 +82,14 @@ export default function Page() {
   }
 
   return (
-    <main className={"flex max-lg:flex-col h-full gap-2"}>
+    <main className={"flex max-lg:flex-col gap-2"}>
+      {/* Filter Form */}
       <form className={"flex flex-col gap-2 lg:w-80"} onSubmit={handleSubmit}>
+        {/* Mobile Search */}
         <div className={"lg:hidden"}>
           <div className={"join w-full"}>
             <button
-              className={"btn btn-square join-item btn-neutral"}
+              className={"btn btn-square join-item btn-secondary"}
               type={"button"}
               onClick={() => setShowFilters(!showFilters)}
             >
@@ -100,11 +102,13 @@ export default function Page() {
               value={search ?? ""}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <button className={"btn btn-square join-item btn-neutral"} type={"submit"}>
+            <button className={"btn btn-square join-item btn-primary"} type={"submit"}>
               <SearchIcon />
             </button>
           </div>
         </div>
+
+        {/* Filter Panel */}
         <div className={clsx("flex flex-col flex-1 gap-2 bg-base-300 p-4 rounded-box", showFilters || "max-lg:hidden")}>
           <div className={"flex-1"}>
             <fieldset className={"fieldset max-lg:hidden"}>
@@ -166,7 +170,7 @@ export default function Page() {
               ))}
             </fieldset>
           </div>
-          <div className={"flex [&>*]:flex-1 gap-2"}>
+          <div className={"mt-2 flex [&>*]:flex-1 gap-2"}>
             <button className={"btn btn-primary"} type={"submit"}>
               Filter
             </button>
@@ -176,6 +180,8 @@ export default function Page() {
           </div>
         </div>
       </form>
+
+      {/* Articles */}
       <div className={"flex-1 flex flex-col gap-2"}>
         {articles.map((article) => (
           <Link

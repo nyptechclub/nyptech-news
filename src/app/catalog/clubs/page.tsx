@@ -35,7 +35,7 @@ const clubs = [
 
 export default function Page() {
   return (
-    <main className={"grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
+    <main className={"grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"}>
       {clubs.map((club, index) => (
         <Link key={index} className={"card bg-base-300 hover:bg-base-200 transition"} href={club.url}>
           <figure>

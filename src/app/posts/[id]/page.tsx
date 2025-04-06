@@ -43,7 +43,7 @@ export default function Page() {
   }
 
   return (
-    <main className={"p-4"}>
+    <main>
       <div className={"sm:w-[90%] md:w-[70%] xl:w-[80%] flex max-xl:flex-col-reverse mx-auto gap-2"}>
         {/* Left Column */}
         <div>

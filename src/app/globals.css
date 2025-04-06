@@ -7,7 +7,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html,
-body {
-  @apply h-full scroll-smooth;
+html {
+  @apply scroll-smooth;
 }

@@ -31,9 +31,14 @@ export default function Page() {
 
   return (
     <main>
-      <div className={"mb-4 aspect-video max-h-100 carousel w-full rounded-box"}>
+      <div className={"mb-2 aspect-video max-h-100 carousel w-full rounded-box"}>
         {featuredArticles.map((article, index) => (
-          <div key={index} id={`featured${index + 1}`} className={"carousel-item w-full relative"}>
+          <Link
+            key={index}
+            id={`featured${index + 1}`}
+            className={"carousel-item w-full relative"}
+            href={`/posts/${article.id}`}
+          >
             <img className={"absolute size-full object-cover blur-xs brightness-50"} src={article.cover} />
             <div className={"absolute size-full flex items-end"}>
               <div className={"px-6 md:px-16 py-4 md:py-8"}>
@@ -58,7 +63,7 @@ export default function Page() {
                 </Link>
               </div>
             )}
-          </div>
+          </Link>
         ))}
       </div>
       <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
