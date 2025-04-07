@@ -42,11 +42,11 @@ export default function Page() {
             href={`/posts/${article.id}`}
           >
             <img
-              className={"absolute size-full object-cover blur-xs brightness-60 group-hover:scale-105 transition"}
+              className={"absolute size-full object-cover blur-xs brightness-60 group-hover:brightness-50 transition"}
               src={article.cover}
             />
             <div className={"absolute size-full flex items-end"}>
-              <div className={clsx("px-6 py-4 md:py-8", articles.length > 1 && "md:px-16")}>
+              <div className={clsx("px-6 py-4 md:py-6", articles.length > 1 && "md:px-16")}>
                 <h2 className={"mb-2 text-2xl md:text-4xl font-bold"}>{article.name}</h2>
                 <p className={"text-sm md:text-md text-current/70"}>{article.excerpt}</p>
               </div>
