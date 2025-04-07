@@ -3,6 +3,7 @@
 import LoadingPage from "@/app/loading";
 import { getArticles, getFeaturedArticles } from "@/lib/database";
 import { Article } from "@/lib/schema";
+import clsx from "clsx";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -30,18 +31,22 @@ export default function Page() {
   }
 
   return (
-    <main>
-      <div className={"mb-2 aspect-video max-h-100 carousel w-full rounded-box"}>
+    <main className={"space-y-2"}>
+      {/* Featured Carousel */}
+      <section className={"aspect-video max-h-100 carousel w-full rounded-box"}>
         {featuredArticles.map((article, index) => (
           <Link
             key={index}
             id={`featured${index + 1}`}
-            className={"carousel-item w-full relative"}
+            className={"carousel-item w-full relative group"}
             href={`/posts/${article.id}`}
           >
-            <img className={"absolute size-full object-cover blur-xs brightness-50"} src={article.cover} />
+            <img
+              className={"absolute size-full object-cover blur-xs brightness-60 group-hover:scale-105 transition"}
+              src={article.cover}
+            />
             <div className={"absolute size-full flex items-end"}>
-              <div className={"px-6 md:px-16 py-4 md:py-8"}>
+              <div className={clsx("px-6 py-4 md:py-8", articles.length > 1 && "md:px-16")}>
                 <h2 className={"mb-2 text-2xl md:text-4xl font-bold"}>{article.name}</h2>
                 <p className={"text-sm md:text-md text-current/70"}>{article.excerpt}</p>
               </div>
@@ -65,27 +70,31 @@ export default function Page() {
             )}
           </Link>
         ))}
-      </div>
-      <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
+      </section>
+
+      {/* All Articles */}
+      <section className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
         {articles.map((article) => (
           <Link
             key={article.id}
-            className={"card bg-base-300 hover:bg-base-200 transition"}
+            className={"card bg-base-300 hover:scale-101 transition"}
             href={`/posts/${article.id}`}
           >
             <figure>
-              <img className={"aspect-video object-cover"} src={article.cover} />
+              <img className={"w-full aspect-video object-cover"} src={article.cover} />
             </figure>
             <div className={"card-body"}>
-              <h2 className={"card-title"}>{article.name}</h2>
-              <p className={"text-current/50"}>{article.excerpt}</p>
-              <p>
+              <div className={"flex-1"}>
+                <h2 className={"card-title"}>{article.name}</h2>
+                <p className={"text-current/50"}>{article.excerpt}</p>
+              </div>
+              <div>
                 <span className={"badge badge-primary"}>{article.tags[0]}</span>
-              </p>
+              </div>
             </div>
           </Link>
         ))}
-      </div>
+      </section>
     </main>
   );
 }

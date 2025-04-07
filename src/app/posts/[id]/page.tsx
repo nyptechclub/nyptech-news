@@ -46,7 +46,7 @@ export default function Page() {
     <main>
       <div className={"sm:w-[90%] md:w-[70%] xl:w-[80%] flex max-xl:flex-col-reverse mx-auto gap-2"}>
         {/* Left Column */}
-        <div>
+        <div className={"flex-1"}>
           <div className={"bg-base-300 rounded-box lg:p-4"}>
             <ArticleRenderer content={articleContent!} />
           </div>

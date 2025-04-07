@@ -186,7 +186,7 @@ export default function Page() {
         {articles.map((article) => (
           <Link
             key={article.id}
-            className={"card hover:bg-base-200 transition sm:flex-row sm:h-40 bg-base-300"}
+            className={"card hover:scale-101 transition sm:flex-row sm:h-40 bg-base-300 overflow-hidden"}
             href={`/posts/${article.id}`}
           >
             <figure>
