@@ -2,6 +2,8 @@ import ArticleRenderer from "@/components/article-renderer";
 import { aboutPageId } from "@/lib/constants";
 import { getArticleContent } from "@/lib/database";
 
+export const revalidate = 3600; // 60 minutes
+
 export default async function Page() {
   const content = await getArticleContent(aboutPageId);
 

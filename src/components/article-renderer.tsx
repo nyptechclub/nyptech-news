@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { ExtendedRecordMap } from "notion-types";
 import { NotionRenderer } from "react-notion-x";

@@ -2,7 +2,7 @@ import ArticleRenderer from "@/components/article-renderer";
 import { getArticle, getArticleContent } from "@/lib/database";
 import { RouteProps } from "@/types";
 
-export const revalidate = 3600;
+export const revalidate = 300; // 5 minutes
 
 export default async function Page(props: RouteProps) {
   const { id } = await props.params;
