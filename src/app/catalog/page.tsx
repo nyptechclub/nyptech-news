@@ -193,13 +193,14 @@ export default function Page() {
               <img className={"aspect-video h-full object-cover"} src={article.cover} alt={article.name} />
             </figure>
             <div className={"card-body p-4"}>
-              <h2 className={"card-title"}>{article.name}</h2>
-              <div className={"flex-1"}>
+              <div className={"mb-2 flex-1"}>
+                <span className={"text-xs text-current/80"}>{article.club[0]}</span>
+                <h2 className={"mb-1 card-title"}>{article.name}</h2>
                 <p className={"text-current/50"}>{article.excerpt}</p>
               </div>
-              <div>
+              <div className={"flex gap-1"}>
                 {article.tags.map((tag) => (
-                  <div key={tag} className={"badge badge-info"}>
+                  <div key={tag} className={"badge badge-sm badge-neutral"}>
                     {tag}
                   </div>
                 ))}

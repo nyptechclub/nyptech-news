@@ -46,7 +46,7 @@ export default function Page() {
               src={article.cover}
             />
             <div className={"absolute size-full flex items-end"}>
-              <div className={clsx("px-6 py-4 md:py-6", articles.length > 1 && "md:px-16")}>
+              <div className={clsx("px-6 py-4 md:py-6", featuredArticles.length > 1 && "md:px-16")}>
                 <h2 className={"mb-2 text-2xl md:text-4xl font-bold"}>{article.name}</h2>
                 <p className={"text-sm md:text-md text-current/70"}>{article.excerpt}</p>
               </div>
@@ -84,12 +84,10 @@ export default function Page() {
               <img className={"w-full aspect-video object-cover"} src={article.cover} />
             </figure>
             <div className={"card-body"}>
-              <div className={"flex-1"}>
-                <h2 className={"card-title"}>{article.name}</h2>
-                <p className={"text-current/50"}>{article.excerpt}</p>
-              </div>
-              <div>
-                <span className={"badge badge-primary"}>{article.tags[0]}</span>
+              <div className={"mb-2 flex-1"}>
+                <span className={"text-xs text-current/80"}>{article.club[0]}</span>
+                <h2 className={"mb-1 card-title"}>{article.name}</h2>
+                <p className={"text-current/50 line-clamp-2"}>{article.excerpt}</p>
               </div>
             </div>
           </Link>

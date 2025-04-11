@@ -61,34 +61,61 @@ export default function Page() {
                 <img src={article?.cover} alt={article?.name} className={"w-full h-full object-cover"} />
               </figure>
               <div className={"p-4"}>
-                <h2 className={"mb-1 text-lg font-bold"}>{article?.name}</h2>
-                <p className={"mb-2 text-current/50"}>{article?.excerpt}</p>
-                <p>
+                <div className={"mb-2"}>
+                  <h2 className={"mb-1 text-lg font-bold"}>{article?.name}</h2>
+                  <p className={"text-current/50"}>{article?.excerpt}</p>
+                </div>
+                <div className={"flex gap-1"}>
                   {article?.tags.map((tag) => (
-                    <span key={tag} className={"badge badge-primary"}>
+                    <span key={tag} className={"badge badge-neutral"}>
                       {tag}
                     </span>
                   ))}
-                </p>
+                </div>
               </div>
             </div>
 
-            {/* Author List */}
-            <div className={"rounded-box bg-base-300"}>
-              <div className={"p-4 pb-0"}>
-                <h2 className={"mb-1 text-lg font-bold"}>Written By</h2>
-              </div>
-              {article?.writtenBy.map((author) => (
-                <div key={author.name} className={"p-4 gap-4 flex items-center"}>
-                  <span className={"avatar"}>
-                    <div className={"w-8 rounded-full"}>
-                      <img src={author.avatar} />
-                    </div>
-                  </span>
-                  <span className={"font-medium"}>{author.name}</span>
+            {/* Clubs List */}
+            {(article?.club.length ?? 0) > 0 && (
+              <div className={"rounded-box bg-base-300"}>
+                <div className={"p-4 pb-0"}>
+                  <h2 className={"mb-1 text-lg font-bold"}>Clubs</h2>
                 </div>
-              ))}
-            </div>
+                <div className={"p-4 pt-2 flex flex-col gap-2"}>
+                  {article?.club.map((club) => (
+                    <div key={club} className={"gap-3 flex items-center"}>
+                      <span className={"avatar"}>
+                        <div className={"w-8 rounded-full"}>
+                          <img src={"/placeholder.webp"} />
+                        </div>
+                      </span>
+                      <span>{club}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Author List */}
+            {(article?.writtenBy.length ?? 0) > 0 && (
+              <div className={"rounded-box bg-base-300"}>
+                <div className={"p-4 pb-0"}>
+                  <h2 className={"mb-1 text-lg font-bold"}>Written By</h2>
+                </div>
+                <div className={"p-4 pt-2 flex flex-col gap-2"}>
+                  {article?.writtenBy.map((author) => (
+                    <div key={author.name} className={"gap-3 flex items-center"}>
+                      <span className={"avatar"}>
+                        <div className={"w-8 rounded-full"}>
+                          <img src={author.avatar} />
+                        </div>
+                      </span>
+                      <span>{author.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
