@@ -194,7 +194,7 @@ export default function Page() {
             </figure>
             <div className={"card-body p-4"}>
               <div className={"mb-2 flex-1"}>
-                <span className={"text-xs text-current/80"}>{article.club[0]}</span>
+                <span className={"text-xs text-current/80"}>{article.clubs[0]}</span>
                 <h2 className={"mb-1 card-title"}>{article.name}</h2>
                 <p className={"text-current/50"}>{article.excerpt}</p>
               </div>

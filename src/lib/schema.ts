@@ -4,7 +4,7 @@ export type Article = {
   name: string;
   tags: string[];
   excerpt: string;
-  club: string[];
+  clubs: string[];
   writtenBy: {
     avatar: string;
     name: string;

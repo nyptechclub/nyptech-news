@@ -1,9 +1,10 @@
 "use server";
 
-import { aboutPageId, articleDatabaseId } from "@/lib/constants";
+import { articleDatabaseId } from "@/lib/constants";
 import notion from "@/lib/integrations/notion";
 import { Article } from "@/lib/schema";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { parsePageId } from "notion-utils";
 
 function parseArticle(data: PageObjectResponse) {
   const properties = data.properties as any;
@@ -24,7 +25,7 @@ function parseArticle(data: PageObjectResponse) {
     name: properties["Name"].title[0].text.content,
     tags: properties["Tags"].multi_select.map((tag: any) => tag.name),
     excerpt: properties["Excerpt"].rich_text[0].text.content,
-    club: properties["Club"].multi_select.map((club: any) => club.name),
+    clubs: properties["Club"].multi_select.map((club: any) => club.name),
     writtenBy: properties["Written By"].people.map((person: any) => ({
       avatar: person.avatar_url,
       name: person.name,
@@ -129,7 +130,7 @@ export async function getFeaturedArticles() {
 export async function getArticle(id: string) {
   // Fetch article by ID
   const response: any = await notion.client.pages.retrieve({
-    page_id: id,
+    page_id: parsePageId(id)!,
   });
 
   // Parse and return article
@@ -137,9 +138,5 @@ export async function getArticle(id: string) {
 }
 
 export async function getArticleContent(id: string) {
-  return await notion.getPage(id);
-}
-
-export async function getAboutContent() {
-  return await getArticleContent(aboutPageId);
+  return await notion.getPage(parsePageId(id)!);
 }

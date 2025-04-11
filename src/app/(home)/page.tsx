@@ -1,34 +1,11 @@
-"use client";
-
-import LoadingPage from "@/app/loading";
 import { getArticles, getFeaturedArticles } from "@/lib/database";
-import { Article } from "@/lib/schema";
 import clsx from "clsx";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-export default function Page() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [featuredArticles, setFeaturedArticles] = useState<Article[]>([]);
-
-  useEffect(() => {
-    Promise.all([
-      getArticles().then((response) => {
-        setArticles(response.results);
-      }),
-      getFeaturedArticles().then((response) => {
-        setFeaturedArticles(response.results);
-      }),
-    ]).finally(() => {
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) {
-    return <LoadingPage />;
-  }
+export default async function Page() {
+  const articles = (await getArticles()).results;
+  const featuredArticles = (await getFeaturedArticles()).results;
 
   return (
     <main className={"space-y-2"}>
@@ -85,7 +62,7 @@ export default function Page() {
             </figure>
             <div className={"card-body"}>
               <div className={"mb-2 flex-1"}>
-                <span className={"text-xs text-current/80"}>{article.club[0]}</span>
+                <span className={"text-xs text-current/80"}>{article.clubs[0]}</span>
                 <h2 className={"mb-1 card-title"}>{article.name}</h2>
                 <p className={"text-current/50 line-clamp-2"}>{article.excerpt}</p>
               </div>

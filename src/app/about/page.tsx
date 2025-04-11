@@ -1,32 +1,9 @@
-"use client";
-
-import LoadingPage from "@/app/loading";
 import ArticleRenderer from "@/components/article-renderer";
 import { aboutPageId } from "@/lib/constants";
 import { getArticleContent } from "@/lib/database";
-import { ExtendedRecordMap } from "notion-types";
-import { parsePageId } from "notion-utils";
-import { useEffect, useState } from "react";
 
-export default function Page() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [content, setContent] = useState<ExtendedRecordMap | null>(null);
-
-  useEffect(() => {
-    const pageId = parsePageId(aboutPageId);
-
-    getArticleContent(pageId!)
-      .then((content) => {
-        setContent(content);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return <LoadingPage />;
-  }
+export default async function Page() {
+  const content = await getArticleContent(aboutPageId);
 
   return (
     <main>

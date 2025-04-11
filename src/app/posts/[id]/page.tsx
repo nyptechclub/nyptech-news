@@ -1,46 +1,13 @@
-"use client";
-
-import LoadingPage from "@/app/loading";
-import NotFoundPage from "@/app/not-found";
 import ArticleRenderer from "@/components/article-renderer";
 import { getArticle, getArticleContent } from "@/lib/database";
-import { Article } from "@/lib/schema";
-import { useParams } from "next/navigation";
-import { ExtendedRecordMap } from "notion-types";
-import { parsePageId } from "notion-utils";
-import { useEffect, useState } from "react";
+import { RouteProps } from "@/types";
 
-export default function Page() {
-  const params = useParams();
+export const revalidate = 3600;
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const [article, setArticle] = useState<Article | null>(null);
-  const [articleContent, setArticleContent] = useState<ExtendedRecordMap | null>(null);
-
-  const id = params.id as string;
-
-  useEffect(() => {
-    const pageId = parsePageId(id);
-
-    Promise.all([
-      getArticle(id).then((post) => {
-        setArticle(post);
-      }),
-      getArticleContent(pageId!).then((content) => {
-        setArticleContent(content);
-      }),
-    ]).finally(() => {
-      setLoading(false);
-    });
-  }, [id]);
-
-  if (loading) {
-    return <LoadingPage />;
-  }
-
-  if (!articleContent) {
-    return <NotFoundPage />;
-  }
+export default async function Page(props: RouteProps) {
+  const { id } = await props.params;
+  const article = await getArticle(id);
+  const articleContent = await getArticleContent(id);
 
   return (
     <main>
@@ -76,13 +43,13 @@ export default function Page() {
             </div>
 
             {/* Clubs List */}
-            {(article?.club.length ?? 0) > 0 && (
+            {(article?.clubs.length ?? 0) > 0 && (
               <div className={"rounded-box bg-base-300"}>
                 <div className={"p-4 pb-0"}>
                   <h2 className={"mb-1 text-lg font-bold"}>Clubs</h2>
                 </div>
                 <div className={"p-4 pt-2 flex flex-col gap-2"}>
-                  {article?.club.map((club) => (
+                  {article?.clubs.map((club) => (
                     <div key={club} className={"gap-3 flex items-center"}>
                       <span className={"avatar"}>
                         <div className={"w-8 rounded-full"}>
