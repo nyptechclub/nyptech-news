@@ -1,3 +1,4 @@
+import ArticleCard from "@/components/article-card";
 import { getArticles, getFeaturedArticles } from "@/lib/database";
 import clsx from "clsx";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
@@ -54,22 +55,7 @@ export default async function Page() {
       {/* All Articles */}
       <section className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
         {articles.map((article) => (
-          <Link
-            key={article.id}
-            className={"card bg-base-300 hover:scale-101 transition"}
-            href={`/posts/${article.id}`}
-          >
-            <figure>
-              <img className={"w-full aspect-video object-cover"} src={article.cover} />
-            </figure>
-            <div className={"card-body"}>
-              <div className={"mb-2 flex-1"}>
-                <span className={"text-xs text-current/80"}>{article.clubs[0]}</span>
-                <h2 className={"mb-1 card-title"}>{article.name}</h2>
-                <p className={"text-current/50 line-clamp-2"}>{article.excerpt}</p>
-              </div>
-            </div>
-          </Link>
+          <ArticleCard key={article.id} data={article} />
         ))}
       </section>
     </main>
