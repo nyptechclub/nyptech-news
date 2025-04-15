@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 
-export const revalidate = 300; // 5 minutes
+export const revalidate = 60; // 1 minute
 
 export default async function Page() {
   const articles = (await getArticles()).results;
